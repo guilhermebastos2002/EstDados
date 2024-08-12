@@ -1,0 +1,32 @@
+package main
+
+import (
+    "fmt"
+)
+
+func minutosParaDormir(h1, m1, h2, m2 int) int {
+    minutosAtual := h1*60 + m1
+    minutosAlarme := h2*60 + m2
+
+    if minutosAlarme <= minutosAtual {
+        minutosAlarme += 24 * 60 
+    }
+
+    // Calcula a diferença entre os horários em minutos
+    diferencaMinutos := minutosAlarme - minutosAtual
+    return diferencaMinutos
+}
+
+func main() {
+    var h1, m1, h2, m2 int
+
+    for {
+        fmt.Scan(&h1, &m1, &h2, &m2)
+        
+        if h1 == 0 && m1 == 0 && h2 == 0 && m2 == 0 {
+            break
+        }
+
+        fmt.Println(minutosParaDormir(h1, m1, h2, m2))
+    }
+}

@@ -1,0 +1,28 @@
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func calcularSuperficieRampa(H, C, L float64, N int) float64 {
+    lado := math.Sqrt(C*C + H*H)
+    area := lado * L
+    return area * float64(N) / 10000
+}
+
+func main() {
+    var N int
+    for {
+        _, err := fmt.Scan(&N)
+        if err != nil || N <= 0 {
+            break
+        }
+
+        var H, C, L float64
+        fmt.Scan(&H, &C, &L)
+
+        superficie := calcularSuperficieRampa(H, C, L, N)
+        fmt.Printf("%.4f\n", superficie)
+    }
+}

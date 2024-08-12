@@ -1,0 +1,70 @@
+package main
+
+import "fmt"
+
+
+type No struct {
+    dado int
+    proximo *No
+}
+
+
+type Fila struct {
+    frente *No
+    tras  *No
+}
+
+
+func (f *Fila) Enfileirar(valor int) {
+    novoNo := &No{dado: valor, proximo: nil}
+    if f.frente == nil {
+        f.frente = novoNo
+        f.tras = novoNo
+    } else {
+        f.tras.proximo = novoNo
+        f.tras = novoNo
+    }
+}
+
+
+func (f *Fila) Desenfileirar() int {
+    if f.frente == nil {
+        fmt.Println("Fila vazia")
+        return -1
+    }
+    valor := f.frente.dado
+    f.frente = f.frente.proximo
+    if f.frente == nil {
+        f.tras = nil
+    }
+    return valor
+}
+
+
+func (f *Fila) Percorrer() {
+    temp := f.frente
+    fmt.Print("Fila: ")
+    for temp != nil {
+        fmt.Printf("%d ", temp.dado)
+        temp = temp.proximo
+    }
+    fmt.Println()
+}
+
+func main() {
+    
+    fila := Fila{}
+
+    
+    fila.Enfileirar(10)
+    fila.Enfileirar(20)
+    fila.Enfileirar(30)
+
+    
+    fila.Percorrer() 
+
+    
+    removido := fila.Desenfileirar()
+    fmt.Println("Elemento removido:", removido)
+    fila.Percorrer() 
+}
